@@ -1,403 +1,401 @@
-import { useState, useRef } from 'react';
-
-// Poster components
-const Poster1 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">🧪</div>
-      <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">WAIT...</h2>
-      <h3 className="text-5xl font-bold mb-10 text-purple-600 leading-tight text-center">Let's Test That Hypothesis First</h3>
-      
-      <div className="bg-yellow-100 border-6 border-yellow-400 rounded-xl p-6 mb-8">
-        <p className="text-3xl font-bold text-gray-700 text-center">Before reacting, ask yourself:</p>
-      </div>
-      
-      <div className="space-y-6">
-        <div className="bg-blue-50 border-6 border-blue-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-blue-600 mb-3 text-center">🔬 OBSERVE</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">What actually happened?</p>
-        </div>
-        <div className="bg-purple-50 border-6 border-purple-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-purple-600 mb-3 text-center">🤔 QUESTION</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Is there another explanation?</p>
-        </div>
-        <div className="bg-green-50 border-6 border-green-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-green-600 mb-3 text-center">💭 PREDICT</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">What happens if I stay calm?</p>
-        </div>
-      </div>
-      
-      <div className="mt-10 bg-green-100 border-6 border-green-500 rounded-xl p-6">
-        <p className="text-4xl font-black text-green-700 text-center">✓ Experiment with Calmness</p>
-      </div>
-    </div>
-  </div>
-);
-
-const Poster2 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">⚗️</div>
-      <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">CAUTION!</h2>
-      <h3 className="text-4xl font-bold mb-8 text-red-600 text-center">Volatile Reaction Detected</h3>
-      
-      <div className="bg-red-100 border-6 border-red-400 rounded-xl p-6 mb-8">
-        <p className="text-4xl font-black text-red-700 text-center">⚠️ WARNING:</p>
-        <p className="text-3xl font-bold text-red-600 mt-3 text-center">Drama is NOT Lab-Safe!</p>
-      </div>
-      
-      <div className="bg-blue-50 border-6 border-blue-300 rounded-xl p-6 mb-8">
-        <p className="text-3xl font-bold text-gray-700 mb-6 text-center">Safety Protocol Activated:</p>
-        
-        <div className="space-y-6">
-          <div className="bg-orange-100 border-6 border-orange-400 rounded-lg p-5">
-            <p className="text-6xl font-black text-orange-600 mb-2 text-center">1️⃣ STOP</p>
-            <p className="text-2xl font-semibold text-gray-700 text-center">Take a breath</p>
-          </div>
-          <div className="bg-yellow-100 border-6 border-yellow-400 rounded-lg p-5">
-            <p className="text-6xl font-black text-yellow-600 mb-2 text-center">2️⃣ THINK</p>
-            <p className="text-2xl font-semibold text-gray-700 text-center">Cool down the reaction</p>
-          </div>
-          <div className="bg-green-100 border-6 border-green-400 rounded-lg p-5">
-            <p className="text-6xl font-black text-green-600 mb-2 text-center">3️⃣ ACT</p>
-            <p className="text-2xl font-semibold text-gray-700 text-center">Respond, don't react</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="bg-blue-200 border-6 border-blue-500 rounded-xl p-6">
-        <p className="text-4xl font-black text-blue-800 text-center">🧊 Cool Heads = Better Results!</p>
-      </div>
-    </div>
-  </div>
-);
-
-const Poster3 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-green-400 to-teal-500 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">🧬</div>
-      <h2 className="text-6xl font-black mb-4 text-gray-800 text-center">EVOLUTION IN PROGRESS</h2>
-      <h3 className="text-4xl font-bold mb-8 text-green-600 text-center">Level Up Your Response</h3>
-      
-      <div className="bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-xl p-8 mb-8 border-6 border-gray-700">
-        <div className="flex justify-between items-center gap-8">
-          <div className="flex-1">
-            <p className="text-7xl mb-3 text-center">😤</p>
-            <p className="text-3xl font-black text-gray-800 text-center">Basic Response</p>
-            <p className="text-xl font-semibold text-gray-600 mt-2 text-center">Drama & Chaos</p>
-          </div>
-          <div className="text-7xl font-black text-gray-700">→</div>
-          <div className="flex-1">
-            <p className="text-7xl mb-3 text-center">😎</p>
-            <p className="text-3xl font-black text-gray-800 text-center">Evolved Response</p>
-            <p className="text-xl font-semibold text-gray-600 mt-2 text-center">Big Brain Energy</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="bg-teal-50 border-6 border-teal-400 rounded-xl p-6 mb-8">
-        <p className="text-3xl font-bold text-gray-700 mb-5 text-center">Adaptation Strategies:</p>
-        <div className="space-y-4">
-          <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
-            <p className="text-xl font-bold text-gray-800 text-center">🧠 Use your prefrontal cortex</p>
-            <p className="text-lg text-gray-600 text-center">(not your amygdala!)</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
-            <p className="text-xl font-bold text-gray-800 text-center">💬 Communicate clearly</p>
-            <p className="text-lg text-gray-600 text-center">(survival skill unlocked)</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
-            <p className="text-xl font-bold text-gray-800 text-center">🤝 Work together</p>
-            <p className="text-lg text-gray-600 text-center">(humans are social organisms)</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="bg-yellow-200 border-6 border-yellow-500 rounded-xl p-6">
-        <p className="text-5xl font-black text-gray-800 text-center">🏆 BE THE APEX PROBLEM SOLVER</p>
-      </div>
-    </div>
-  </div>
-);
-
-const Poster4 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-pink-400 to-rose-500 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">🔬</div>
-      <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">PEER REVIEW</h2>
-      <h3 className="text-4xl font-bold mb-10 text-pink-600 leading-tight text-center">Check Your Data Before Publishing</h3>
-      
-      <div className="bg-pink-100 border-6 border-pink-400 rounded-xl p-6 mb-8">
-        <p className="text-3xl font-bold text-gray-700 text-center">Scientific Method for Conflict:</p>
-      </div>
-      
-      <div className="space-y-6">
-        <div className="bg-yellow-50 border-6 border-yellow-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-yellow-600 mb-3 text-center">📊 COLLECT DATA</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Get the full story first</p>
-        </div>
-        <div className="bg-purple-50 border-6 border-purple-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-purple-600 mb-3 text-center">🔍 ANALYZE</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Look for patterns & biases</p>
-        </div>
-        <div className="bg-blue-50 border-6 border-blue-400 rounded-xl p-6">
-          <p className="text-6xl font-black text-blue-600 mb-3 text-center">✅ VERIFY</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Ask others for input</p>
-        </div>
-      </div>
-      
-      <div className="mt-10 bg-rose-100 border-6 border-rose-500 rounded-xl p-6">
-        <p className="text-4xl font-black text-rose-700 text-center">📝 Results: Better Understanding!</p>
-      </div>
-    </div>
-  </div>
-);
-
-const Poster5 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-600 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">⚛️</div>
-      <h2 className="text-6xl font-black mb-4 text-gray-800 text-center leading-tight">ENERGY CONSERVATION</h2>
-      <h3 className="text-4xl font-bold mb-10 text-indigo-600 leading-tight text-center">Don't Waste Your Energy on Drama</h3>
-      
-      <div className="bg-indigo-100 border-6 border-indigo-400 rounded-xl p-6 mb-8">
-        <p className="text-3xl font-bold text-gray-700 text-center">Physics Says:</p>
-        <p className="text-2xl font-semibold text-indigo-600 mt-3 text-center">Energy goes where you direct it!</p>
-      </div>
-      
-      <div className="space-y-6">
-        <div className="bg-red-50 border-6 border-red-400 rounded-xl p-6">
-          <p className="text-5xl font-black text-red-600 mb-3 text-center">❌ LOW ENERGY STATE</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Arguing, complaining, blaming</p>
-        </div>
-        
-        <div className="text-center">
-          <div className="text-6xl font-black text-gray-700 inline-block animate-bounce">⬇️</div>
-        </div>
-        
-        <div className="bg-green-50 border-6 border-green-400 rounded-xl p-6">
-          <p className="text-5xl font-black text-green-600 mb-3 text-center">✅ HIGH ENERGY STATE</p>
-          <p className="text-2xl font-semibold text-gray-700 text-center">Problem-solving, creating, learning</p>
-        </div>
-      </div>
-      
-      <div className="mt-10 bg-purple-100 border-6 border-purple-500 rounded-xl p-6">
-        <p className="text-4xl font-black text-purple-700 text-center">⚡ Choose Where Your Energy Goes!</p>
-      </div>
-    </div>
-  </div>
-);
-
-const Poster6 = () => (
-  <div className="w-full h-full bg-gradient-to-br from-amber-400 to-orange-500 p-12 flex items-center justify-center">
-    <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
-      <div className="text-9xl mb-6 text-center">🌡️</div>
-      <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">TEMPERATURE CHECK</h2>
-      <h3 className="text-4xl font-bold mb-10 text-amber-600 leading-tight text-center">Monitor Your Emotional Temperature</h3>
-      
-      <div className="bg-red-100 border-6 border-red-500 rounded-xl p-6 mb-4">
-        <div className="flex items-center justify-between">
-          <p className="text-5xl">🔥</p>
-          <p className="text-3xl font-black text-red-600">BOILING (Angry)</p>
-          <p className="text-5xl">🔥</p>
-        </div>
-      </div>
-      
-      <div className="bg-orange-100 border-6 border-orange-400 rounded-xl p-6 mb-4">
-        <div className="flex items-center justify-between">
-          <p className="text-5xl">😤</p>
-          <p className="text-3xl font-black text-orange-600">HOT (Frustrated)</p>
-          <p className="text-5xl">😤</p>
-        </div>
-      </div>
-      
-      <div className="bg-yellow-100 border-6 border-yellow-400 rounded-xl p-6 mb-4">
-        <div className="flex items-center justify-between">
-          <p className="text-5xl">😐</p>
-          <p className="text-3xl font-black text-yellow-600">WARM (Annoyed)</p>
-          <p className="text-5xl">😐</p>
-        </div>
-      </div>
-      
-      <div className="bg-green-100 border-6 border-green-400 rounded-xl p-6 mb-4">
-        <div className="flex items-center justify-between">
-          <p className="text-5xl">😌</p>
-          <p className="text-3xl font-black text-green-600">COOL (Calm)</p>
-          <p className="text-5xl">😌</p>
-        </div>
-      </div>
-      
-      <div className="bg-blue-100 border-6 border-blue-500 rounded-xl p-6 mb-8">
-        <div className="flex items-center justify-between">
-          <p className="text-5xl">🧊</p>
-          <p className="text-3xl font-black text-blue-600">FROZEN (Peaceful)</p>
-          <p className="text-5xl">🧊</p>
-        </div>
-      </div>
-      
-      <div className="bg-amber-100 border-6 border-amber-500 rounded-xl p-6">
-        <p className="text-3xl font-black text-amber-700 text-center">🌡️ Know Your Temp = Control Your Reaction!</p>
-      </div>
-    </div>
-  </div>
-);
-
-export default function App() {
-  const [currentPoster, setCurrentPoster] = useState(0);
-  const posterRef = useRef(null);
-
-  const posters = [
-    { component: <Poster1 />, name: "Hypothesis Testing" },
-    { component: <Poster2 />, name: "Safety Protocol" },
-    { component: <Poster3 />, name: "Evolution" },
-    { component: <Poster4 />, name: "Peer Review" },
-    { component: <Poster5 />, name: "Energy Conservation" },
-    { component: <Poster6 />, name: "Temperature Check" },
-  ];
-
-  const nextPoster = () => {
-    setCurrentPoster((prev) => (prev + 1) % posters.length);
-  };
-
-  const prevPoster = () => {
-    setCurrentPoster((prev) => (prev - 1 + posters.length) % posters.length);
-  };
-
-  const downloadAsPNG = async () => {
-    const posterElement = posterRef.current;
-    if (!posterElement) return;
-
-    try {
-      // Use html2canvas to capture the poster
-      const html2canvas = (await import('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/+esm')).default;
-      
-      const canvas = await html2canvas(posterElement, {
-        scale: 3, // 3x scale for high resolution (300 DPI equivalent)
-        backgroundColor: null,
-        width: 2550, // 8.5 inches at 300 DPI
-        height: 3300, // 11 inches at 300 DPI
-        useCORS: true,
-      });
-
-      // Convert to blob and download
-      canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = `poster-${currentPoster + 1}-${posters[currentPoster].name.replace(/\s+/g, '-')}.png`;
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(url);
-      }, 'image/png');
-    } catch (error) {
-      console.error('Error downloading poster:', error);
-      alert('Could not download poster. Please try using Print to PDF instead.');
-    }
-  };
-
-  const printPoster = () => {
-    window.print();
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Print-only styles */}
-      <style>{`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De-escalation Posters</title>
+    
+    <!-- React & ReactDOM from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
         @media print {
-          body { margin: 0; padding: 0; }
-          .no-print { display: none !important; }
-          .poster-container { 
-            width: 8.5in;
-            height: 11in;
-            page-break-after: always;
-            margin: 0;
-            padding: 0;
-          }
-          @page {
-            size: letter;
-            margin: 0;
-          }
+            body { margin: 0; padding: 0; }
+            .no-print { display: none !important; }
+            .poster-container { 
+                width: 8.5in;
+                height: 11in;
+                page-break-after: always;
+                margin: 0;
+                padding: 0;
+            }
+            @page {
+                size: letter;
+                margin: 0;
+            }
         }
         .border-6 {
-          border-width: 6px;
+            border-width: 6px;
         }
-      `}</style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-      {/* Controls - Hidden when printing */}
-      <div className="no-print bg-gray-800 p-6 shadow-lg">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-white text-center mb-6">
-            Science De-escalation Posters
-          </h1>
-          
-          <div className="flex items-center justify-between gap-4">
-            <button
-              onClick={prevPoster}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors"
-            >
-              ← Previous
-            </button>
-            
-            <div className="text-white text-center">
-              <p className="text-2xl font-bold">{posters[currentPoster].name}</p>
-              <p className="text-lg text-gray-300 mt-1">
-                Poster {currentPoster + 1} of {posters.length}
-              </p>
-              <div className="flex gap-2 justify-center mt-3">
-                {posters.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPoster(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentPoster ? 'bg-blue-500' : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                  />
-                ))}
-              </div>
+    <script type="text/babel">
+        const { useState, useRef } = React;
+
+        // Poster 1
+        const Poster1 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">🧪</div>
+                    <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">WAIT...</h2>
+                    <h3 className="text-5xl font-bold mb-10 text-purple-600 leading-tight text-center">Let's Test That Hypothesis First</h3>
+                    
+                    <div className="bg-yellow-100 border-6 border-yellow-400 rounded-xl p-6 mb-8">
+                        <p className="text-3xl font-bold text-gray-700 text-center">Before reacting, ask yourself:</p>
+                    </div>
+                    
+                    <div className="space-y-6">
+                        <div className="bg-blue-50 border-6 border-blue-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-blue-600 mb-3 text-center">🔬 OBSERVE</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">What actually happened?</p>
+                        </div>
+                        <div className="bg-purple-50 border-6 border-purple-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-purple-600 mb-3 text-center">🤔 QUESTION</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Is there another explanation?</p>
+                        </div>
+                        <div className="bg-green-50 border-6 border-green-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-green-600 mb-3 text-center">💭 PREDICT</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">What happens if I stay calm?</p>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-10 bg-green-100 border-6 border-green-500 rounded-xl p-6">
+                        <p className="text-4xl font-black text-green-700 text-center">✓ Experiment with Calmness</p>
+                    </div>
+                </div>
             </div>
-            
-            <button
-              onClick={nextPoster}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors"
-            >
-              Next →
-            </button>
-          </div>
+        );
 
-          <div className="flex gap-4 justify-center mt-6">
-            <button
-              onClick={printPoster}
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors flex items-center gap-2"
-            >
-              🖨️ Print Current Poster
-            </button>
-            <button
-              onClick={downloadAsPNG}
-              className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors flex items-center gap-2"
-            >
-              📥 Download as PNG (High-Res)
-            </button>
-          </div>
-          
-          <p className="text-gray-400 text-center mt-4 text-sm">
-            💡 Print at 8.5" × 11" (Letter size) for best results. PNG downloads are 300 DPI for professional printing.
-          </p>
-        </div>
-      </div>
+        // Poster 2
+        const Poster2 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">⚗️</div>
+                    <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">CAUTION!</h2>
+                    <h3 className="text-4xl font-bold mb-8 text-red-600 text-center">Volatile Reaction Detected</h3>
+                    
+                    <div className="bg-red-100 border-6 border-red-400 rounded-xl p-6 mb-8">
+                        <p className="text-4xl font-black text-red-700 text-center">⚠️ WARNING:</p>
+                        <p className="text-3xl font-bold text-red-600 mt-3 text-center">Drama is NOT Lab-Safe!</p>
+                    </div>
+                    
+                    <div className="bg-blue-50 border-6 border-blue-300 rounded-xl p-6 mb-8">
+                        <p className="text-3xl font-bold text-gray-700 mb-6 text-center">Safety Protocol Activated:</p>
+                        
+                        <div className="space-y-6">
+                            <div className="bg-orange-100 border-6 border-orange-400 rounded-lg p-5">
+                                <p className="text-6xl font-black text-orange-600 mb-2 text-center">1️⃣ STOP</p>
+                                <p className="text-2xl font-semibold text-gray-700 text-center">Take a breath</p>
+                            </div>
+                            <div className="bg-yellow-100 border-6 border-yellow-400 rounded-lg p-5">
+                                <p className="text-6xl font-black text-yellow-600 mb-2 text-center">2️⃣ THINK</p>
+                                <p className="text-2xl font-semibold text-gray-700 text-center">Cool down the reaction</p>
+                            </div>
+                            <div className="bg-green-100 border-6 border-green-400 rounded-lg p-5">
+                                <p className="text-6xl font-black text-green-600 mb-2 text-center">3️⃣ ACT</p>
+                                <p className="text-2xl font-semibold text-gray-700 text-center">Respond, don't react</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-blue-200 border-6 border-blue-500 rounded-xl p-6">
+                        <p className="text-4xl font-black text-blue-800 text-center">🧊 Cool Heads = Better Results!</p>
+                    </div>
+                </div>
+            </div>
+        );
 
-      {/* Poster Display */}
-      <div className="flex-1 flex items-center justify-center p-8 no-print">
-        <div 
-          ref={posterRef}
-          className="poster-container w-full max-w-4xl aspect-[8.5/11] shadow-2xl"
-        >
-          {posters[currentPoster].component}
-        </div>
-      </div>
+        // Poster 3
+        const Poster3 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-green-400 to-teal-500 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">🧬</div>
+                    <h2 className="text-6xl font-black mb-4 text-gray-800 text-center">EVOLUTION IN PROGRESS</h2>
+                    <h3 className="text-4xl font-bold mb-8 text-green-600 text-center">Level Up Your Response</h3>
+                    
+                    <div className="bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-xl p-8 mb-8 border-6 border-gray-700">
+                        <div className="flex justify-between items-center gap-8">
+                            <div className="flex-1">
+                                <p className="text-7xl mb-3 text-center">😤</p>
+                                <p className="text-3xl font-black text-gray-800 text-center">Basic Response</p>
+                                <p className="text-xl font-semibold text-gray-600 mt-2 text-center">Drama & Chaos</p>
+                            </div>
+                            <div className="text-7xl font-black text-gray-700">→</div>
+                            <div className="flex-1">
+                                <p className="text-7xl mb-3 text-center">😎</p>
+                                <p className="text-3xl font-black text-gray-800 text-center">Evolved Response</p>
+                                <p className="text-xl font-semibold text-gray-600 mt-2 text-center">Big Brain Energy</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-teal-50 border-6 border-teal-400 rounded-xl p-6 mb-8">
+                        <p className="text-3xl font-bold text-gray-700 mb-5 text-center">Adaptation Strategies:</p>
+                        <div className="space-y-4">
+                            <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
+                                <p className="text-xl font-bold text-gray-800 text-center">🧠 Use your prefrontal cortex</p>
+                                <p className="text-lg text-gray-600 text-center">(not your amygdala!)</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
+                                <p className="text-xl font-bold text-gray-800 text-center">💬 Communicate clearly</p>
+                                <p className="text-lg text-gray-600 text-center">(survival skill unlocked)</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4 border-4 border-teal-300">
+                                <p className="text-xl font-bold text-gray-800 text-center">🤝 Work together</p>
+                                <p className="text-lg text-gray-600 text-center">(humans are social organisms)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-yellow-200 border-6 border-yellow-500 rounded-xl p-6">
+                        <p className="text-5xl font-black text-gray-800 text-center">🏆 BE THE APEX PROBLEM SOLVER</p>
+                    </div>
+                </div>
+            </div>
+        );
 
-      {/* Print-only content */}
-      <div className="hidden print:block poster-container">
-        {posters[currentPoster].component}
-      </div>
-    </div>
-  );
-}
+        // Poster 4
+        const Poster4 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-pink-400 to-rose-500 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">🔬</div>
+                    <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">PEER REVIEW</h2>
+                    <h3 className="text-4xl font-bold mb-10 text-pink-600 leading-tight text-center">Check Your Data Before Publishing</h3>
+                    
+                    <div className="bg-pink-100 border-6 border-pink-400 rounded-xl p-6 mb-8">
+                        <p className="text-3xl font-bold text-gray-700 text-center">Scientific Method for Conflict:</p>
+                    </div>
+                    
+                    <div className="space-y-6">
+                        <div className="bg-yellow-50 border-6 border-yellow-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-yellow-600 mb-3 text-center">📊 COLLECT DATA</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Get the full story first</p>
+                        </div>
+                        <div className="bg-purple-50 border-6 border-purple-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-purple-600 mb-3 text-center">🔍 ANALYZE</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Look for patterns & biases</p>
+                        </div>
+                        <div className="bg-blue-50 border-6 border-blue-400 rounded-xl p-6">
+                            <p className="text-6xl font-black text-blue-600 mb-3 text-center">✅ VERIFY</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Ask others for input</p>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-10 bg-rose-100 border-6 border-rose-500 rounded-xl p-6">
+                        <p className="text-4xl font-black text-rose-700 text-center">📝 Results: Better Understanding!</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Poster 5
+        const Poster5 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-600 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">⚛️</div>
+                    <h2 className="text-6xl font-black mb-4 text-gray-800 text-center leading-tight">ENERGY CONSERVATION</h2>
+                    <h3 className="text-4xl font-bold mb-10 text-indigo-600 leading-tight text-center">Don't Waste Your Energy on Drama</h3>
+                    
+                    <div className="bg-indigo-100 border-6 border-indigo-400 rounded-xl p-6 mb-8">
+                        <p className="text-3xl font-bold text-gray-700 text-center">Physics Says:</p>
+                        <p className="text-2xl font-semibold text-indigo-600 mt-3 text-center">Energy goes where you direct it!</p>
+                    </div>
+                    
+                    <div className="space-y-6">
+                        <div className="bg-red-50 border-6 border-red-400 rounded-xl p-6">
+                            <p className="text-5xl font-black text-red-600 mb-3 text-center">❌ LOW ENERGY STATE</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Arguing, complaining, blaming</p>
+                        </div>
+                        
+                        <div className="text-center">
+                            <div className="text-6xl font-black text-gray-700 inline-block">⬇️</div>
+                        </div>
+                        
+                        <div className="bg-green-50 border-6 border-green-400 rounded-xl p-6">
+                            <p className="text-5xl font-black text-green-600 mb-3 text-center">✅ HIGH ENERGY STATE</p>
+                            <p className="text-2xl font-semibold text-gray-700 text-center">Problem-solving, creating, learning</p>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-10 bg-purple-100 border-6 border-purple-500 rounded-xl p-6">
+                        <p className="text-4xl font-black text-purple-700 text-center">⚡ Choose Where Your Energy Goes!</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Poster 6
+        const Poster6 = () => (
+            <div className="w-full h-full bg-gradient-to-br from-amber-400 to-orange-500 p-12 flex items-center justify-center">
+                <div className="bg-white rounded-2xl p-12 w-full h-full flex flex-col justify-center">
+                    <div className="text-9xl mb-6 text-center">🌡️</div>
+                    <h2 className="text-7xl font-black mb-4 text-gray-800 text-center">TEMPERATURE CHECK</h2>
+                    <h3 className="text-4xl font-bold mb-10 text-amber-600 leading-tight text-center">Monitor Your Emotional Temperature</h3>
+                    
+                    <div className="bg-red-100 border-6 border-red-500 rounded-xl p-6 mb-4">
+                        <div className="flex items-center justify-between">
+                            <p className="text-5xl">🔥</p>
+                            <p className="text-3xl font-black text-red-600">BOILING (Angry)</p>
+                            <p className="text-5xl">🔥</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-orange-100 border-6 border-orange-400 rounded-xl p-6 mb-4">
+                        <div className="flex items-center justify-between">
+                            <p className="text-5xl">😤</p>
+                            <p className="text-3xl font-black text-orange-600">HOT (Frustrated)</p>
+                            <p className="text-5xl">😤</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-yellow-100 border-6 border-yellow-400 rounded-xl p-6 mb-4">
+                        <div className="flex items-center justify-between">
+                            <p className="text-5xl">😐</p>
+                            <p className="text-3xl font-black text-yellow-600">WARM (Annoyed)</p>
+                            <p className="text-5xl">😐</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-green-100 border-6 border-green-400 rounded-xl p-6 mb-4">
+                        <div className="flex items-center justify-between">
+                            <p className="text-5xl">😌</p>
+                            <p className="text-3xl font-black text-green-600">COOL (Calm)</p>
+                            <p className="text-5xl">😌</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-blue-100 border-6 border-blue-500 rounded-xl p-6 mb-8">
+                        <div className="flex items-center justify-between">
+                            <p className="text-5xl">🧊</p>
+                            <p className="text-3xl font-black text-blue-600">FROZEN (Peaceful)</p>
+                            <p className="text-5xl">🧊</p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-amber-100 border-6 border-amber-500 rounded-xl p-6">
+                        <p className="text-3xl font-black text-amber-700 text-center">🌡️ Know Your Temp = Control Your Reaction!</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Main App
+        function App() {
+            const [currentPoster, setCurrentPoster] = useState(0);
+            const posterRef = useRef(null);
+
+            const posters = [
+                { component: <Poster1 />, name: "Hypothesis Testing" },
+                { component: <Poster2 />, name: "Safety Protocol" },
+                { component: <Poster3 />, name: "Evolution" },
+                { component: <Poster4 />, name: "Peer Review" },
+                { component: <Poster5 />, name: "Energy Conservation" },
+                { component: <Poster6 />, name: "Temperature Check" },
+            ];
+
+            const nextPoster = () => {
+                setCurrentPoster((prev) => (prev + 1) % posters.length);
+            };
+
+            const prevPoster = () => {
+                setCurrentPoster((prev) => (prev - 1 + posters.length) % posters.length);
+            };
+
+            const printPoster = () => {
+                window.print();
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-900 flex flex-col">
+                    {/* Controls */}
+                    <div className="no-print bg-gray-800 p-6 shadow-lg">
+                        <div className="max-w-7xl mx-auto">
+                            <h1 className="text-4xl font-bold text-white text-center mb-6">
+                                Science De-escalation Posters
+                            </h1>
+                            
+                            <div className="flex items-center justify-between gap-4">
+                                <button
+                                    onClick={prevPoster}
+                                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors"
+                                >
+                                    ← Previous
+                                </button>
+                                
+                                <div className="text-white text-center">
+                                    <p className="text-2xl font-bold">{posters[currentPoster].name}</p>
+                                    <p className="text-lg text-gray-300 mt-1">
+                                        Poster {currentPoster + 1} of {posters.length}
+                                    </p>
+                                    <div className="flex gap-2 justify-center mt-3">
+                                        {posters.map((_, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => setCurrentPoster(index)}
+                                                className={`w-3 h-3 rounded-full transition-colors ${
+                                                    index === currentPoster ? 'bg-blue-500' : 'bg-gray-600 hover:bg-gray-500'
+                                                }`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                <button
+                                    onClick={nextPoster}
+                                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors"
+                                >
+                                    Next →
+                                </button>
+                            </div>
+
+                            <div className="flex gap-4 justify-center mt-6">
+                                <button
+                                    onClick={printPoster}
+                                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors flex items-center gap-2"
+                                >
+                                    🖨️ Print Current Poster
+                                </button>
+                            </div>
+                            
+                            <p className="text-gray-400 text-center mt-4 text-sm">
+                                💡 Print at 8.5" × 11" (Letter size). Use browser Print to PDF or print directly.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Poster Display */}
+                    <div className="flex-1 flex items-center justify-center p-8 no-print">
+                        <div 
+                            ref={posterRef}
+                            className="poster-container w-full max-w-4xl aspect-[8.5/11] shadow-2xl"
+                        >
+                            {posters[currentPoster].component}
+                        </div>
+                    </div>
+
+                    {/* Print-only content */}
+                    <div className="hidden print:block poster-container">
+                        {posters[currentPoster].component}
+                    </div>
+                </div>
+            );
+        }
+
+        // Render
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
