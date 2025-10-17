@@ -399,4 +399,51 @@
                                     
                                     <button
                                         onClick={nextPoster}
-                                        className="bg-blue-500 hover:bg-blue-600 text-white font-bol
+                                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors"
+                                    >
+                                        Next →
+                                    </button>
+                                </div>
+
+                                <div className="flex gap-4 justify-center mt-6">
+                                    <button
+                                        onClick={printPoster}
+                                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors flex items-center gap-2"
+                                    >
+                                        🖨️ Print Current Poster
+                                    </button>
+                                </div>
+                                
+                                <p className="text-gray-400 text-center mt-4 text-sm">
+                                    💡 Use browser Print function (Ctrl+P or Cmd+P). Set margins to "None" for best results.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Poster Display */}
+                        <div className="flex-1 flex items-center justify-center p-8">
+                            <div 
+                                ref={posterRef}
+                                className="w-full max-w-4xl aspect-letter shadow-2xl"
+                            >
+                                {posters[currentPoster].component}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Print-only View - This ensures ONLY the poster prints on ONE page */}
+                    <div className="poster-print-wrapper">
+                        <div className="poster-content">
+                            {posters[currentPoster].component}
+                        </div>
+                    </div>
+                </>
+            );
+        }
+
+        // Render
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
